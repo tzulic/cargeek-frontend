@@ -1,117 +1,70 @@
-# CarGeek Frontend
+<a href="https://chat.vercel.ai/">
+  <img alt="Next.js 14 and App Router-ready AI chatbot." src="app/(chat)/opengraph-image.png">
+  <h1 align="center">Chat SDK</h1>
+</a>
 
-Modern web frontend for the CarGeek automotive intelligence platform.
+<p align="center">
+    Chat SDK is a free, open-source template built with Next.js and the AI SDK that helps you quickly build powerful chatbot applications.
+</p>
 
-## Overview
-
-This repository contains the frontend application for CarGeek, providing an intuitive interface for automotive research, vehicle comparisons, and market insights.
-
-## Tech Stack
-
-- **Framework**: [To be decided - Next.js/React/Vue]
-- **Styling**: [To be decided - Tailwind CSS/CSS Modules]
-- **State Management**: [To be decided]
-- **API Integration**: REST/SSE with CarGeek Backend
+<p align="center">
+  <a href="https://chat-sdk.dev"><strong>Read Docs</strong></a> ·
+  <a href="#features"><strong>Features</strong></a> ·
+  <a href="#model-providers"><strong>Model Providers</strong></a> ·
+  <a href="#deploy-your-own"><strong>Deploy Your Own</strong></a> ·
+  <a href="#running-locally"><strong>Running locally</strong></a>
+</p>
+<br/>
 
 ## Features
 
-- 🚗 Vehicle Research Interface
-- 💬 Real-time Chat with CarGeek AI
-- 📊 Market Analytics Dashboard
-- 🔍 Advanced Vehicle Search
-- 📱 Responsive Design
-- ⚡ Server-Side Events for Real-time Updates
+- [Next.js](https://nextjs.org) App Router
+  - Advanced routing for seamless navigation and performance
+  - React Server Components (RSCs) and Server Actions for server-side rendering and increased performance
+- [AI SDK](https://sdk.vercel.ai/docs)
+  - Unified API for generating text, structured objects, and tool calls with LLMs
+  - Hooks for building dynamic chat and generative user interfaces
+  - Supports xAI (default), OpenAI, Fireworks, and other model providers
+- [shadcn/ui](https://ui.shadcn.com)
+  - Styling with [Tailwind CSS](https://tailwindcss.com)
+  - Component primitives from [Radix UI](https://radix-ui.com) for accessibility and flexibility
+- Data Persistence
+  - [Neon Serverless Postgres](https://vercel.com/marketplace/neon) for saving chat history and user data
+  - [Vercel Blob](https://vercel.com/storage/blob) for efficient file storage
+- [Auth.js](https://authjs.dev)
+  - Simple and secure authentication
 
-## Getting Started
+## Model Providers
 
-### Prerequisites
+This template uses the [Vercel AI Gateway](https://vercel.com/docs/ai-gateway) to access multiple AI models through a unified interface. The default configuration includes [xAI](https://x.ai) models (`grok-2-vision-1212`, `grok-3-mini-beta`) routed through the gateway.
 
-- Node.js 18+
-- npm/yarn/pnpm
-- CarGeek backend running locally or accessible
+### AI Gateway Authentication
 
-### Installation
+**For Vercel deployments**: Authentication is handled automatically via OIDC tokens.
 
-```bash
-# Clone the repository
-git clone https://github.com/tzulic/cargeek-frontend.git
-cd cargeek-frontend
+**For non-Vercel deployments**: You need to provide an AI Gateway API key by setting the `AI_GATEWAY_API_KEY` environment variable in your `.env.local` file.
 
-# Install dependencies
-npm install
+With the [AI SDK](https://ai-sdk.dev/docs/introduction), you can also switch to direct LLM providers like [OpenAI](https://openai.com), [Anthropic](https://anthropic.com), [Cohere](https://cohere.com/), and [many more](https://ai-sdk.dev/providers/ai-sdk-providers) with just a few lines of code.
 
-# Set up environment variables
-cp .env.example .env.local
+## Deploy Your Own
 
-# Start development server
-npm run dev
-```
+You can deploy your own version of the Next.js AI Chatbot to Vercel with one click:
 
-### Environment Variables
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fai-chatbot&env=AUTH_SECRET&envDescription=Learn+more+about+how+to+get+the+API+Keys+for+the+application&envLink=https%3A%2F%2Fgithub.com%2Fvercel%2Fai-chatbot%2Fblob%2Fmain%2F.env.example&demo-title=AI+Chatbot&demo-description=An+Open-Source+AI+Chatbot+Template+Built+With+Next.js+and+the+AI+SDK+by+Vercel.&demo-url=https%3A%2F%2Fchat.vercel.ai&products=%5B%7B%22type%22%3A%22integration%22%2C%22protocol%22%3A%22ai%22%2C%22productSlug%22%3A%22grok%22%2C%22integrationSlug%22%3A%22xai%22%7D%2C%7B%22type%22%3A%22integration%22%2C%22protocol%22%3A%22storage%22%2C%22productSlug%22%3A%22neon%22%2C%22integrationSlug%22%3A%22neon%22%7D%2C%7B%22type%22%3A%22integration%22%2C%22protocol%22%3A%22storage%22%2C%22productSlug%22%3A%22upstash-kv%22%2C%22integrationSlug%22%3A%22upstash%22%7D%2C%7B%22type%22%3A%22blob%22%7D%5D)
 
-```bash
-NEXT_PUBLIC_API_URL=http://localhost:8000
-NEXT_PUBLIC_API_KEY=your_api_key_here
-```
+## Running locally
 
-## Project Structure
+You will need to use the environment variables [defined in `.env.example`](.env.example) to run Next.js AI Chatbot. It's recommended you use [Vercel Environment Variables](https://vercel.com/docs/projects/environment-variables) for this, but a `.env` file is all that is necessary.
 
-```
-cargeek-frontend/
-├── src/
-│   ├── components/     # Reusable UI components
-│   ├── pages/          # Application pages/routes
-│   ├── services/       # API integration services
-│   ├── hooks/          # Custom React hooks
-│   ├── utils/          # Utility functions
-│   └── styles/         # Global styles
-├── public/             # Static assets
-├── tests/              # Test files
-└── docs/               # Documentation
-```
+> Note: You should not commit your `.env` file or it will expose secrets that will allow others to control access to your various AI and authentication provider accounts.
 
-## Development
+1. Install Vercel CLI: `npm i -g vercel`
+2. Link local instance with Vercel and GitHub accounts (creates `.vercel` directory): `vercel link`
+3. Download your environment variables: `vercel env pull`
 
 ```bash
-# Run development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Run tests
-npm test
-
-# Lint code
-npm run lint
+pnpm install
+pnpm dev
 ```
 
-## API Integration
-
-The frontend connects to the CarGeek backend API for:
-- Vehicle data and specifications
-- Real-time chat conversations
-- Market listings and pricing
-- Consumer sentiment analysis
-- Media content (images/videos)
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## License
-
-This project is proprietary and confidential.
-
-## Related Repositories
-
-- [CarGeek Backend](https://github.com/tzulic/CarGeek) - Backend API and orchestration
-- [CarGeek Chatbot](https://github.com/tzulic/cargeek-chatbot) - Chat interface component
-
-## Contact
-
-For questions or support, please contact the CarGeek development team.
+Your app template should now be running on [localhost:3000](http://localhost:3000).
